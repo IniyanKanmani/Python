@@ -23,4 +23,3 @@ print(create_spend_chart([food, clothing, auto]))
 
 # Run unit tests automatically
 main(module='test_module', exit=False)
-

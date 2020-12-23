@@ -1,225 +1,79 @@
 
 # Project available in https://repl.it/@lastlost/boilerplate-arithmetic-formatter#arithmetic_arranger.py
 
-def signcon(x) :
-    if x[1] == '+' :
-        val = int(x[0]) + int(x[2])
-    elif x[1] == '-' :
-        val = int(x[0]) - int(x[2])
-    else :
-        val = "not+-"
-    return str(val)
+def value(oper1,operand,oper2):
+    if len(oper1) >= len(oper2):
+        if operand == '+':
+            return (((str(int(oper1) + int(oper2))).rjust(len(oper1) + 2)).ljust(len(oper1) + 6))
+        else:
+            return (((str(int(oper1) - int(oper2))).rjust(len(oper1) + 2)).ljust(len(oper1) + 6))
+    else:
+        if operand == '+':
+            return (((str(int(oper1) + int(oper2))).rjust(len(oper2) + 2)).ljust(len(oper2) + 6))
+        else:
+            return (((str(int(oper1) - int(oper2))).rjust(len(oper2) + 2)).ljust(len(oper2) + 6))
+
+def fstarrange(oper1,oper2):
+    if len(oper1) >= len(oper2):
+        return ((oper1.rjust(len(oper1) + 2)).ljust(len(oper1) + 6))
+    else:
+        return (oper1.rjust(len(oper2) + 2).ljust(len(oper2) + 6))
+
+def sndarrange(oper1,operand,oper2):
+    if len(oper1) >= len(oper2):
+        return ((operand + ' ' + oper2.rjust(len(oper1))).ljust(len(oper1) + 6))
+    else:
+        return ((operand + ' ' + oper2).ljust(len(oper2) + 6))
+
+def hyparrange(oper1,operand,oper2):
+    if len(oper1) >= len(oper2):
+        return (len(oper1) + 2)
+    else:
+        return (len(oper2) + 2)
 
 def arithmetic_arranger(problems, true = False):
-    fstline = list()
-    sndline = list()
-    hyphen = list()
-    sumorsub = list()
-    printstring = ""
-    if len(problems) > 5 :
-        arranged_problems = "Error: Too many problems."
-        return arranged_problems
-    for operation in problems :
-        operation = operation.split()
-        if not(operation[0].isdigit() and operation[2].isdigit()) :
-            arranged_problems = "Error: Numbers must only contain digits."
-            return arranged_problems
-        if len(operation[0]) > 4 or len(operation[2]) > 4 :
-            arranged_problems = "Error: Numbers cannot be more than four digits."
-            return arranged_problems
-        if(signcon(operation) == "not+-") :
-            arranged_problems = "Error: Operator must be '+' or '-'."
-            return arranged_problems
-        len0 = len(operation[0])
-        len2 = len(operation[2])
-        val = signcon(operation)
-        if len0 == 1 :
-            if len2 == 1 :
-                fstline.append("  " + str(operation[0]))
-                sndline.append(str(operation[1]) + " " + str(operation[2]))
-                hyphen.append(3)
-                if len(val) == 1 :
-                    sumorsub.append("  " + val)
-                elif len(val) == 2 :
-                    sumorsub.append(" " + val)
-            elif len2 == 2 :
-                fstline.append("   " + str(operation[0]))
-                sndline.append(str(operation[1]) + " " + str(operation[2]))
-                hyphen.append(4)
-                if len(val) == 2 :
-                    sumorsub.append("  " + val)
-                elif len(val) == 3 :
-                    sumorsub.append(" " + val)
-            elif len2 == 3 :
-                fstline.append("    " + str(operation[0]))
-                sndline.append(str(operation[1]) + " " + str(operation[2]))
-                hyphen.append(5)
-                if len(val) == 3 :
-                    sumorsub.append("  " + val)
-                elif len(val) == 4 :
-                    sumorsub.append(" " + val)
-            elif len2 == 4 :
-                fstline.append("     " + str(operation[0])[0])
-                sndline.append(str(operation[1]) + " " + str(operation[2]))
-                hyphen.append(6)
-                if len(val) == 4 :
-                    sumorsub.append("  " + val)
-                elif len(val) == 5 :
-                    sumorsub.append(" " + val)
-        elif len0 == 2 :
-            if len2 == 1 :
-                fstline.append("  " + str(operation[0]))
-                sndline.append(str(operation[1]) + "  " + str(operation[2]))
-                hyphen.append(4)
-                if len(val) == 1 :
-                    sumorsub.append("   " + val)
-                elif len(val) == 2 :
-                    sumorsub.append("  " + val)
-                elif len(val) == 3 :
-                    sumorsub.append(" " + val)
-            elif len2 == 2 :
-                fstline.append("  " + str(operation[0]))
-                sndline.append(str(operation[1]) + " " + str(operation[2]))
-                hyphen.append(4)
-                if len(val) == 1 :
-                    sumorsub.append("   " + val)
-                elif len(val) == 2 :
-                    sumorsub.append("  " + val)
-                elif len(val) == 3 :
-                    sumorsub.append(" " + val)
-            elif len2 == 3 :
-                fstline.append("   " + str(operation[0]))
-                sndline.append(str(operation[1]) + " " + str(operation[2]))
-                hyphen.append(5)
-                if len(val) == 3 :
-                    sumorsub.append("  " + val)
-                elif len(val) == 4 :
-                    sumorsub.append(" " + val)
-            elif len2 == 4 :
-                fstline.append("    " + str(operation[0])[0])
-                sndline.append(str(operation[1]) + " " + str(operation[2]))
-                hyphen.append(6)
-                if len(val) == 4 :
-                    sumorsub.append("  " + val)
-                elif len(val) == 5 :
-                    sumorsub.append(" " + val)
-        elif len0 == 3 :
-            if len2 == 1 :
-                fstline.append("  " + str(operation[0]))
-                sndline.append(str(operation[1]) + "   " + str(operation[2]))
-                hyphen.append(5)
-                if len(val) == 2 :
-                    sumorsub.append("   " + val)
-                elif len(val) == 3 :
-                    sumorsub.append("  " + val)
-                elif len(val) == 4 :
-                    sumorsub.append(" " + val)
-            elif len2 == 2 :
-                fstline.append("  " + str(operation[0]))
-                sndline.append(str(operation[1]) + "  " + str(operation[2]))
-                hyphen.append(5)
-                if len(val) == 1 :
-                    sumorsub.append("    " + val)
-                elif len(val) == 2 :
-                    sumorsub.append("   " + val)
-                elif len(val) == 3 :
-                    sumorsub.append("  " + val)
-                elif len(val) == 4 :
-                    sumorsub.append(" " + val)
-            elif len2 == 3 :
-                fstline.append(" " + str(operation[0]))
-                sndline.append(str(operation[1]) + " " + str(operation[2]))
-                hyphen.append(5)
-                if len(val) == 1 :
-                    sumorsub.append("    " + val)
-                elif len(val) == 2 :
-                    sumorsub.append("   " + val)
-                elif len(val) == 3 :
-                    sumorsub.append("  " + val)
-                elif len(val) == 4 :
-                    sumorsub.append(" " + val)
-            elif len2 == 4 :
-                fstline.append("  " + str(operation[0]))
-                sndline.append(str(operation[1]) + " " + str(operation[2]))
-                hyphen.append(6)
-                if len(val) == 1 :
-                    sumorsub.append("     " + val)
-                elif len(val) == 2 :
-                    sumorsub.append("    " + val)
-                elif len(val) == 3 :
-                    sumorsub.append("   " + val)
-                elif len(val) == 4 :
-                    sumorsub.append("  " + val)
-                elif len(val) == 5 :
-                    sumorsub.append(" " + val)
-        elif len0 == 4 :
-            if len2 == 1 :
-                fstline.append("  " + str(operation[0]))
-                sndline.append(str(operation[1]) + "    " + str(operation[2]))
-                hyphen.append(6)
-                if len(val) == 3 :
-                    sumorsub.append("   " + val)
-                elif len(val) == 4 :
-                    sumorsub.append("  " + val)
-                elif len(val) == 5 :
-                    sumorsub.append(" " + val)
-            elif len2 == 2 :
-                fstline.append("  " + str(operation[0]))
-                sndline.append(str(operation[1]) + "   " + str(operation[2]))
-                hyphen.append(6)
-                if len(val) == 3 :
-                    sumorsub.append("   " + val)
-                elif len(val) == 4 :
-                    sumorsub.append("  " + val)
-                elif len(val) == 5 :
-                    sumorsub.append(" " + val)
-            elif len2 == 3 :
-                fstline.append("  " + str(operation[0]))
-                sndline.append(str(operation[1]) + "  " + str(operation[2]))
-                hyphen.append(6)
-                if len(val) == 1 :
-                    sumorsub.append("     " + val)
-                elif len(val) == 2 :
-                    sumorsub.append("    " + val)
-                elif len(val) == 3 :
-                    sumorsub.append("   " + val)
-                elif len(val) == 4 :
-                    sumorsub.append("  " + val)
-                elif len(val) == 5 :
-                    sumorsub.append(" " + val)
-            elif len2 == 4 :
-                fstline.append("  " + str(operation[0]))
-                sndline.append(str(operation[1]) + " " + str(operation[2]))
-                hyphen.append(6)
-                if len(val) == 1 :
-                    sumorsub.append("     " + val)
-                elif len(val) == 2 :
-                    sumorsub.append("    " + val)
-                elif len(val) == 3 :
-                    sumorsub.append("   " + val)
-                elif len(val) == 4 :
-                    sumorsub.append("  " + val)
-                elif len(val) == 5 :
-                    sumorsub.append(" " + val)
-    for fi in fstline :
-        printstring = printstring + fi + "    "
-    printstring = printstring.rstrip() + "\n"
-    for si in sndline :
-        printstring = printstring + si + "    "
-    printstring = printstring.rstrip() + "\n"
-    for hi in hyphen :
-        if hi == 3 :
-            printstring = printstring + "---    "
-        elif hi == 4 :
-            printstring = printstring + "----    "
-        elif hi == 5 :
-            printstring = printstring + "-----    "
-        elif hi == 6 :
-            printstring = printstring + "------    "
-    arranged_problems = printstring.rstrip()
-    if true == True :
-        printstring = printstring.rstrip() + "\n"
-        for vi in sumorsub :
-            printstring = printstring + vi + "    "
-        arranged_problems = printstring.rstrip()
-    return arranged_problems
+    fst = list()
+    snd = list()
+    hyp = list()
+    thd = list()
+    fstline = ""
+    sndline = ""
+    hypline = ""
+    thdline = ""
+    if len(problems) > 5:
+        arranged_Problems = "Error: Too many problems."
+        return arranged_Problems
+    for prob in problems:
+        oper = prob.split()
+        if not(oper[1] == '+' or oper[1] == '-'):
+            arranged_Problems = "Error: Operator must be '+' or '-'."
+            return arranged_Problems
+        if not(oper[0].isdigit() and oper[2].isdigit()):
+            arranged_Problems = "Error: Numbers must only contain digits."
+            return arranged_Problems
+        if len(oper[0]) > 4 or len(oper[2]) > 4:
+            arranged_Problems = "Error: Numbers cannot be more than four digits."
+            return arranged_Problems
+        fst.append(fstarrange(oper[0],oper[2]))
+        snd.append(sndarrange(oper[0],oper[1],oper[2]))
+        hyp.append(hyparrange(oper[0],oper[1],oper[2]))
+        if true == True:
+            thd.append(value(oper[0],oper[1],oper[2]))
+    for val in fst:
+        fstline = fstline + val
+    fstline = fstline.rstrip()
+    for val in snd:
+        sndline = sndline + val
+    sndline = sndline.rstrip()
+    for val in hyp:
+        for l in range(val):
+            hypline = hypline + '-'
+        hypline = hypline + '    '
+    hypline = hypline.rstrip()
+    arranged_Problems = fstline + "\n" + sndline + "\n" + hypline
+    if true == True:
+        for val in thd:
+            thdline = thdline + val
+        thdline = thdline.rstrip()
+        arranged_Problems = arranged_Problems + "\n" + thdline
+    return arranged_Problems

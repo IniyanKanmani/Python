@@ -1,3 +1,6 @@
+
+# Project available in https://repl.it/@lastlost/boilerplate-time-calculator#time_calculator.py
+
 def find_day(given_day, add_days) :
     given_day = given_day.upper()
     day = ""
@@ -96,12 +99,3 @@ def add_time(start, duration, daygiven = False):
         new_time = new_time + " (" + str(result_day) + " days later)"
 
     return new_time
-
-
-
-print(add_time("3:00 PM", "3:10"))
-print(add_time("11:43 AM", "00:20"))
-print(add_time("10:10 PM", "3:30"))
-print(add_time("6:30 PM", "205:12"))
-print(add_time("11:30 AM", "2:32", "Monday"))
-print(add_time("11:43 PM", "24:20", "tueSday"))

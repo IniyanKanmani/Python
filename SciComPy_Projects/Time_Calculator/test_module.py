@@ -1,6 +1,3 @@
-
-# Project available in https://repl.it/@lastlost/boilerplate-time-calculator#time_calculator.py
-
 import unittest
 from time_calculator import add_time
 
@@ -69,4 +66,3 @@ class UnitTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
-
